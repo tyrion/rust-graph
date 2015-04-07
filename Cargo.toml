@@ -1,0 +1,8 @@
+[package]
+name = "graph"
+version = "0.0.1"
+authors = ["Germano Gabbianelli <tyrion.mx@gmail.com>"]
+
+[[bin]]
+name = "graph"
+test = false
