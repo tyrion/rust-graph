@@ -1,8 +1,4 @@
 [package]
 name = "graph"
-version = "0.0.1"
+version = "0.0.7"
 authors = ["Germano Gabbianelli <tyrion.mx@gmail.com>"]
-
-[[bin]]
-name = "graph"
-test = false

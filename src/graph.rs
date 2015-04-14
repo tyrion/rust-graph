@@ -1,9 +1,9 @@
-use edge::Edge;
+use edge::{Edge, EdgeRef};
 
 pub trait Graph {
     type Vertex;
 
-    type Edge: Edge<Self::Vertex>;
+    type Edge: EdgeRef<Self::Vertex>;
 
     // type Iter: Iterator<Item=Self::Edge>;
 
@@ -13,15 +13,16 @@ pub trait Graph {
     // fn outgoing_edges(&self, Self::Vertex) -> Self::Iter;
 
     fn add_edge(&mut self, Self::Vertex, Self::Edge);
-    fn has_edge(&self, Self::Vertex, <Self::Edge as Edge<Self::Vertex>>::K) -> bool;
-    fn del_edge(&mut self, Self::Vertex, <Self::Edge as Edge<Self::Vertex>>::K);
-    fn get_edgeval(&self, Self::Vertex, <Self::Edge as Edge<Self::Vertex>>::K)
+    fn has_edge(&self, Self::Vertex, <Self::Edge as Edge<Self::Vertex>>::I) -> bool;
+    fn del_edge(&mut self, Self::Vertex, <Self::Edge as Edge<Self::Vertex>>::I);
+    fn get_edge(&self, Self::Vertex, <Self::Edge as Edge<Self::Vertex>>::K)
+        -> Option<<Self::Edge as EdgeRef<Self::Vertex>>::Ref>;
+
+    fn get_edgeval(&self, Self::Vertex, <Self::Edge as Edge<Self::Vertex>>::I)
         -> Option<&<Self::Edge as Edge<Self::Vertex>>::V>;
 //
 //     fn has_edgeval(&self, Self::Vertex, &<Self::Edge as Edge>::V) -> bool;
     // fn get_edgeval(&self, Self::Vertex, Self::EdgeVal) -> Option<Self::Edge>;
-    fn get_edge(&self, Self::Vertex, &<Self::Edge as Edge<Self::Vertex>>::V)
-        -> Option<<Self::Edge as Edge<Self::Vertex>>::K>;
 
     // fn set_edge(&mut self, Self::Vertex, Self::Edge);
 }
